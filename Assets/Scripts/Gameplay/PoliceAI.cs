@@ -31,14 +31,13 @@ public class PoliceAI : MonoBehaviour
                 }
                 break;
             }
-            default:
-                throw new ArgumentOutOfRangeException();
         }
     }
 
     private enum State
     {
-        Wandering
+        Wandering,
+        Chasing
     }
     
     private State _currentState = State.Wandering;
@@ -52,11 +51,31 @@ public class PoliceAI : MonoBehaviour
                 UpdateWandering();
                 break;
             }
+            case State.Chasing:
+            {
+                UpdateChasing();
+                break;
+            }
         }
     }
 
     private void UpdateWandering()
     {
         _aiTargetSetter.target = _wanderingWaypoints[_currentWaypointIndex].position;
+    }
+
+    private void UpdateChasing()
+    {
+        _aiTargetSetter.target = GameManager.Instance.Player.transform.position;
+    }
+
+    public void Chase()
+    {
+        _currentState = State.Chasing;
+    }
+
+    public void Wanter()
+    {
+        _currentState = State.Wandering;
     }
 }
