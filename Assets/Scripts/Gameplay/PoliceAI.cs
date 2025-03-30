@@ -74,7 +74,7 @@ public class PoliceAI : MonoBehaviour
         _currentState = State.Chasing;
     }
 
-    public void Wanter()
+    public void Wander()
     {
         _currentState = State.Wandering;
     }
