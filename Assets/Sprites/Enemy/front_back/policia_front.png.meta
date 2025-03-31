@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: e74d6b713629c434a9c08d974567c1bc
+guid: 513489bfa94b66b48884e98474791930
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8273524975305245344
-    second: arrowDown_0
+      213: 2993541896030323776
+    second: policia_front_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: arrowDown_0
+      name: policia_front_0
       rect:
         serializedVersion: 2
-        x: 21
-        y: 15
-        width: 58
-        height: 70
+        x: 41
+        y: 6
+        width: 135
+        height: 212
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 06dbb96bed88e2d80800000000000000
-      internalID: -8273524975305245344
+      spriteID: 04403257e723b8920800000000000000
+      internalID: 2993541896030323776
       vertices: []
       indices: 
       edges: []
@@ -147,8 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      arrowDown_0: -8273524975305245344
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
