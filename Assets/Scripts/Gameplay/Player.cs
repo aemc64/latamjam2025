@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     
     private InputAction _moveAction;
     private InputAction _interactAction;
+    private Animator _animator;
 
     private bool _canMove = true;
     private IInteractable _currentInteractable;
@@ -15,6 +16,7 @@ public class Player : MonoBehaviour
     private void Start()
     {
         _moveAction = InputSystem.actions.FindAction("Move");
+        _animator = GetComponent<Animator>();
         _interactAction = InputSystem.actions.FindAction("Jump");
     }
 
@@ -24,6 +26,7 @@ public class Player : MonoBehaviour
         {
             var moveValue = _moveAction.ReadValue<Vector2>();
             transform.position += (Vector3)moveValue * (_speed * Time.deltaTime);
+            _animator.SetBool("isMovingFront", true);
         }
         
         if (_currentInteractable != null && _interactAction.WasPerformedThisFrame())
