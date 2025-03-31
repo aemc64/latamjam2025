@@ -12,29 +12,25 @@ public class QuickTimeEvent : MonoBehaviour
     [SerializeField] private InputImage _inputPrefab;
     [SerializeField] private int _numberOfInputs;
     [SerializeField] private RectTransform _inputsParent;
-
-    private float _timer;
-    private List<InputImage> _inputImages = new List<InputImage>();
-    private List<InputType> _inputTypes = new List<InputType>();
+    
     private InputAction _moveDownAction;
     private InputAction _moveUpAction;
     private InputAction _moveLeftAction;
     private InputAction _moveRightAction;
     
+    private List<InputImage> _inputImages = new List<InputImage>();
+    private List<InputType> _inputTypes = new List<InputType>();
+    
+    private float _timer;
     private int _currentInput = 0;
 
-    private void Start()
+    public void Initialize()
     {
         _moveDownAction = InputSystem.actions.FindAction("MoveDown");
         _moveUpAction = InputSystem.actions.FindAction("MoveUp");
         _moveLeftAction = InputSystem.actions.FindAction("MoveLeft");
         _moveRightAction = InputSystem.actions.FindAction("MoveRight");
         
-        Initialize();
-    }
-
-    private void Initialize()
-    {
         for (var i = 0; i < _numberOfInputs; i++)
         {
             var inputImage = Instantiate(_inputPrefab, _inputsParent);
@@ -45,6 +41,8 @@ public class QuickTimeEvent : MonoBehaviour
         }
 
         _timer = _time;
+        
+        gameObject.SetActive(true);
     }
 
     private void Update()
@@ -104,12 +102,28 @@ public class QuickTimeEvent : MonoBehaviour
     private void OnFail()
     {
         Debug.Log($"QuickTimeEvent: OnFail");
-        gameObject.SetActive(false);
+        Clean();
+        
     }
 
     private void OnSuccess()
     {
         Debug.Log($"QuickTimeEvent: OnSuccess");
+        Clean();
+    }
+
+    private void Clean()
+    {
+        for (var i = _inputImages.Count - 1; i >= 0; i--)
+        {
+            Destroy(_inputImages[i].gameObject);
+        }
+        
+        _inputImages.Clear();
+        _inputTypes.Clear();
+        
+        GameManager.Instance.UnregisterInteractable();
+        
         gameObject.SetActive(false);
     }
 }

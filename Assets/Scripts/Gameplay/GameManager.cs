@@ -3,12 +3,14 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private GameObject _player;
+    [SerializeField] private Player _player;
     [SerializeField] private List<PoliceAI> _polices;
     
     public static GameManager Instance { get; private set; }
+
+    private IInteractable _currentInteractable;
     
-    public GameObject Player => _player;
+    public Player Player => _player;
 
     private void Awake()
     {
@@ -36,5 +38,22 @@ public class GameManager : MonoBehaviour
         {
             police.Chase();
         }
+    }
+
+    public void RegisterInteractable(IInteractable interactable)
+    {
+        if (_currentInteractable != null)
+        {
+            return;
+        }
+        
+        _currentInteractable = interactable;
+        Player.EnableMovement(false);
+    }
+
+    public void UnregisterInteractable()
+    {
+        _currentInteractable = null;
+        Player.EnableMovement(true);
     }
 }

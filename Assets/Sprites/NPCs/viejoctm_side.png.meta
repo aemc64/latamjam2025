@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      viejoctm_side_0: 3555498256605076523
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
