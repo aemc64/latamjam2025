@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     private InputAction _moveAction;
     private InputAction _interactAction;
     private Animator _animator;
+    private SpriteRenderer _spriteRenderer;
 
     private bool _canMove = true;
     private IInteractable _currentInteractable;
@@ -16,8 +17,10 @@ public class Player : MonoBehaviour
     private void Start()
     {
         _moveAction = InputSystem.actions.FindAction("Move");
-        _animator = GetComponent<Animator>();
         _interactAction = InputSystem.actions.FindAction("Jump");
+        
+        _animator = GetComponent<Animator>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
@@ -54,5 +57,10 @@ public class Player : MonoBehaviour
         {
             _currentInteractable = null;
         }
+    }
+
+    public void EnableSprite(bool enable)
+    {
+        _spriteRenderer.enabled = enable;
     }
 }
