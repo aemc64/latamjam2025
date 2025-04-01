@@ -23,9 +23,12 @@ public class QuickTimeEvent : MonoBehaviour
     
     private float _timer;
     private int _currentInput = 0;
+    private FoodStore _foodStore;
 
-    public void Initialize()
+    public void Initialize(FoodStore foodStore)
     {
+        _foodStore = foodStore;
+        
         _moveDownAction = InputSystem.actions.FindAction("MoveDown");
         _moveUpAction = InputSystem.actions.FindAction("MoveUp");
         _moveLeftAction = InputSystem.actions.FindAction("MoveLeft");
@@ -102,17 +105,17 @@ public class QuickTimeEvent : MonoBehaviour
     private void OnFail()
     {
         Debug.Log($"QuickTimeEvent: OnFail");
-        Clean();
+        Clean(false);
         
     }
 
     private void OnSuccess()
     {
         Debug.Log($"QuickTimeEvent: OnSuccess");
-        Clean();
+        Clean(true);
     }
 
-    private void Clean()
+    private void Clean(bool success)
     {
         for (var i = _inputImages.Count - 1; i >= 0; i--)
         {
@@ -122,7 +125,7 @@ public class QuickTimeEvent : MonoBehaviour
         _inputImages.Clear();
         _inputTypes.Clear();
         
-        GameManager.Instance.UnregisterInteractable();
+        _foodStore.OnQuickTimeEventFinished(success);
         
         gameObject.SetActive(false);
     }
